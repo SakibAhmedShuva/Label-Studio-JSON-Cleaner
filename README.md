@@ -12,6 +12,8 @@ When working with Label Studio annotations, special characters and encoding issu
 
 This tool addresses these challenges by carefully cleaning the JSON data while maintaining the integrity of annotation positions and structure.
 
+Sample JSON file provided in "samples" folder.
+
 ## Features
 
 - 🔍 Fixes common encoding issues (UTF-8 special characters)
