@@ -1,6 +1,6 @@
 # Label Studio JSON Cleaner
 
-A robust Python utility to clean and fix encoding issues in Label Studio JSON annotation files while preserving annotation structure and positions.
+A robust Python utility to clean and fix encoding issues in Label Studio JSON annotation files while preserving annotation structure and positions. The tool now includes advanced special character analysis capabilities.
 
 ## Problem Statement
 
@@ -9,18 +9,21 @@ When working with Label Studio annotations, special characters and encoding issu
 - Shifted annotation positions during data conversion
 - Processing errors in downstream tasks
 - Reduced annotation efficiency and data quality
+- Difficult-to-detect Unicode and special character issues
 
-This tool addresses these challenges by carefully cleaning the JSON data while maintaining the integrity of annotation positions and structure.
+This tool addresses these challenges by providing both cleaning capabilities and comprehensive special character analysis while maintaining the integrity of annotation positions and structure.
 
 Sample JSON file provided in "samples" folder.
 
 ## Features
 
 - 🔍 Fixes common encoding issues (UTF-8 special characters)
+- 📊 Analyzes and reports special character usage and frequency
 - 🎯 Preserves annotation positions and structure
 - 🛡️ Maintains JSON data integrity
 - 📝 Supports nested JSON structures
 - 🔄 Handles common problematic character sequences
+- 📈 Generates detailed special character analysis reports
 
 ## Installation
 
@@ -34,6 +37,8 @@ cd Label-Studio-JSON-Cleaner
 
 ## Usage
 
+### Cleaning JSON Files
+
 ```python
 from ls_json_cleaner import clean_json_with_annotations
 
@@ -43,8 +48,36 @@ output_file = "cleaned_annotations.json"
 clean_json_with_annotations(input_file, output_file)
 ```
 
-## Character Mappings
+### Analyzing Special Characters
 
+```python
+from ls_json_cleaner import find_special_chars_in_json, print_analysis_report
+
+# Analyze special characters in your JSON file
+json_file = "path/to/your/labelstudio_export.json"
+results = find_special_chars_in_json(json_file)
+print_analysis_report(results)
+```
+
+The analysis will generate:
+- A detailed console report showing character frequencies
+- A comprehensive JSON report file with character details including:
+  - Unicode names
+  - Character categories
+  - Hex values
+  - Occurrence counts
+
+## Character Analysis and Mappings
+
+### Special Character Analysis
+The analyzer identifies and reports on:
+- Non-ASCII characters
+- Unicode properties
+- Character frequencies
+- Character categories
+- Hex values
+
+### Cleaning Mappings
 The cleaner handles the following common problematic character sequences:
 
 ```python
@@ -57,7 +90,13 @@ encoding_fixes = {
     'â€': '"',   # Right double quote
     'Ã©': 'e',
     'Ã¨': 'e',
-    'Â': ' '
+    'Â': ' ',
+    # Additional special character mappings
+    '©': '(c)',     # COPYRIGHT SIGN
+    '‰': '%',       # PER MILLE SIGN
+    '¬': '-',       # NOT SIGN
+    '¢': 'c',       # CENT SIGN
+    # ... and more
 }
 ```
 
@@ -67,6 +106,8 @@ encoding_fixes = {
 2. **Maintained Accuracy**: Preserves annotation positions for accurate model training
 3. **Error Prevention**: Reduces processing errors in downstream tasks
 4. **Enhanced Efficiency**: Saves time by automatically fixing common encoding issues
+5. **Better Data Insights**: Provides detailed analysis of special character usage
+6. **Quality Assurance**: Helps identify potential encoding issues before they cause problems
 
 ## Contributing
 
