@@ -2,6 +2,8 @@
 
 A robust Python utility to clean and fix encoding issues in Label Studio JSON annotation files while preserving annotation structure and positions. The tool now includes advanced special character analysis capabilities.
 
+Note: Some special characters are commented out. Uncomment them as you need them.
+
 ## Problem Statement
 
 When working with Label Studio annotations, special characters and encoding issues can cause several problems:
